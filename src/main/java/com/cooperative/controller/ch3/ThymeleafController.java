@@ -24,13 +24,13 @@ public class ThymeleafController {
     public String helloThymeleaf(Model model, @PathVariable("id") Long id) {
         model.addAttribute("hello", "hello Thymeleaf！");
         String msg = "<h1>我是h1</h1>";
-        model.addAttribute("msg",msg);
-        model.addAttribute("a",1);
-        model.addAttribute("b",2);
+        model.addAttribute("msg", msg);
+        model.addAttribute("a", 1);
+        model.addAttribute("b", 2);
         User user = new User();
         user.setName("test");
         user.setDepartmentId(1);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
 
         List<User> userList = Lists.newArrayList();
         for (int i = 0; i < 10; i++) {
@@ -41,7 +41,7 @@ public class ThymeleafController {
         }
         model.addAttribute("userList", userList);
 
-        Map<String,User> userMap = Maps.newHashMap();
+        Map<String, User> userMap = Maps.newHashMap();
         for (int i = 0; i < 10; i++) {
             User user3 = new User();
             user3.setId(i);
@@ -59,8 +59,8 @@ public class ThymeleafController {
 
         model.addAttribute("itdragonStr", "itdragonBlog");
         model.addAttribute("itdragonBool", true);
-        model.addAttribute("itdragonArray", new Integer[]{1,2,3,4});
-        model.addAttribute("itdragonList", Arrays.asList(1,3,2,4,0));
+        model.addAttribute("itdragonArray", new Integer[]{1, 2, 3, 4});
+        model.addAttribute("itdragonList", Arrays.asList(1, 3, 2, 4, 0));
         Map itdragonMap = new HashMap();
         itdragonMap.put("thName", "${#...}");
         itdragonMap.put("desc", "变量表达式内置方法");
@@ -151,10 +151,25 @@ public class ThymeleafController {
     }
 
     /**
-     *Redirect Forward
+     * Redirect Forward
      */
     @RequestMapping(value = "saveOrder")
-    public String saveOrder(Order order){
+    public String saveOrder(Order order) {
         return "redirect:/order/index";
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        Vector<Integer> vector = new Vector<Integer>();
+        long start = System.currentTimeMillis();
+        for(int i=0;i<100000;i++)
+            list.add(i);
+        long end = System.currentTimeMillis();
+        System.out.println("ArrayList进行100000次插入操作耗时："+(end-start)+"ms");
+        start = System.currentTimeMillis();
+        for(int i=0;i<100000;i++)
+            vector.add(i);
+        end = System.currentTimeMillis();
+        System.out.println("Vector进行100000次插入操作耗时："+(end-start)+"ms");
     }
 }
