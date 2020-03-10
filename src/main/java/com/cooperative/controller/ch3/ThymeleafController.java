@@ -29,7 +29,6 @@ public class ThymeleafController {
         model.addAttribute("b", 2);
         User user = new User();
         user.setName("test");
-        user.setDepartmentId(1);
         model.addAttribute("user", user);
 
         List<User> userList = Lists.newArrayList();

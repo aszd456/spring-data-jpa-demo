@@ -39,7 +39,7 @@ public class UserService {
             User user = new User();
             user.setId(rs.getInt("id"));
             user.setName(rs.getString("name"));
-            user.setDepartmentId(rs.getInt("department_id"));
+//            user.setDepartmentId(rs.getInt("department_id"));
             return user;
         }
     }

@@ -53,7 +53,7 @@ public class JsonController {
         return "name:" + user.getName() + ",id:" + user.getId();
     }
 
-    @JsonView(User.IdView.class)
+//    @JsonView(User.IdView.class)
     @RequestMapping("/id.json")
     public User queryIds() {
         return null;

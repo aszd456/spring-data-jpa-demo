@@ -7,35 +7,44 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.collect.Maps;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Map;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true,value = {"id","password"})
+@Entity
+//@JsonIgnoreProperties(ignoreUnknown = true, value = {"id", "password"})
 public class User extends BaseMode implements Serializable {
 
-    public interface IdNameView extends IdView{};
+//    public interface IdNameView extends IdView {
+//    }
+//
+//    ;
 
     private static final long serialVersionUID = -501311792025981521L;
 
-    @JsonView(IdNameView.class)
+//    @JsonView(IdNameView.class)
+    @Column
     private String name;
 
-    private Integer departmentId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     @JsonIgnore
+    @Column
     private String password;
 
-    Map<String,Object> map= Maps.newHashMap();
-
-    @JsonAnySetter
-    private void other(String key,Object value){
-        map.put(key,value);
-    }
-
-    @JsonAnyGetter
-    public Map<String,Object> getOtherProperties(){
-        return map;
-    }
+//    Map<String, Object> map = Maps.newHashMap();
+//
+//    @JsonAnySetter
+//    private void other(String key, Object value) {
+//        map.put(key, value);
+//    }
+//
+//    @JsonAnyGetter
+//    public Map<String, Object> getOtherProperties() {
+//        return map;
+//    }
 
 }
