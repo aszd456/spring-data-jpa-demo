@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/json")
-public class JsonController {
+@RequestMapping("/json4")
+public class Json4Controller {
 
     @Autowired
     UserService userService;

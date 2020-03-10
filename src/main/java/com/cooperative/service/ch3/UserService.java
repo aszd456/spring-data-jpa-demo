@@ -10,4 +10,6 @@ public interface UserService {
     public User getUserById(Integer id);
 
     public void updateUser(Integer id, Integer type);
+
+    public User saveUser(User user);
 }

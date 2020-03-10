@@ -1,7 +1,6 @@
 package com.cooperative.controller.ch3;
 
 import com.cooperative.controller.ch3.form.WorkInfoForm;
-import com.cooperative.entity.order.Order;
 import com.cooperative.entity.user.User;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -145,7 +144,7 @@ public class ThymeleafController {
      */
     @RequestMapping("/addWorkInfo")
     @ResponseBody
-    public void addWorkInfo(@Validated({WorkInfoForm.Insert.class}) WorkInfoForm workInfoForm, BindingResult bindingResult) {
+    public void addWorkInfo(@Validated({WorkInfoForm.Add.class}) WorkInfoForm workInfoForm, BindingResult bindingResult) {
         return;
     }
 
@@ -153,7 +152,7 @@ public class ThymeleafController {
      * Redirect Forward
      */
     @RequestMapping(value = "saveOrder")
-    public String saveOrder(Order order) {
+    public String saveOrder() {
         return "redirect:/order/index";
     }
 
