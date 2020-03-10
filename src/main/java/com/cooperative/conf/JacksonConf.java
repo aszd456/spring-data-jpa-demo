@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
 
+/**
+ * jackson全局配置
+ */
 @Configuration
 public class JacksonConf {
 

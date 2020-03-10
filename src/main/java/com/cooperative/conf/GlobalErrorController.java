@@ -17,6 +17,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 全局错误处理
+ */
 @Slf4j
 @Controller
 public class GlobalErrorController extends AbstractErrorController {
@@ -29,26 +32,31 @@ public class GlobalErrorController extends AbstractErrorController {
         super(new DefaultErrorAttributes());
     }
 
-
     @RequestMapping(ERROR_PATH)
     public ModelAndView getErrorPath(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> model = Collections.unmodifiableMap(getErrorAttributes(request, false));
         Throwable cause = getCause(request);
         int status = (int) model.get("status");
+        //错误信息
         String message = (String) model.get("message");
+        //友好提示
         String errorMessage = getErrorMessage(cause);
 
+        String requestPath = (String)model.get("path");
+        //后台打印日志信息方方便查错
         log.info(status + "," + message, cause);
+        log.info("requestPath"+":"+requestPath);
+
         response.setStatus(status);
         if (!isJsonRequest(request)) {
-            ModelAndView view = new ModelAndView("/error.html");
+            ModelAndView view = new ModelAndView("error");
             view.addAllObjects(model);
             view.addObject("errorMessage", errorMessage);
             view.addObject("status", status);
             view.addObject("cause", cause);
             return view;
         } else {
-            Map error = new HashMap();
+            Map<String,Object> error = new HashMap();
             error.put("success", false);
             error.put("errorMessage", errorMessage);
             error.put("message", message);

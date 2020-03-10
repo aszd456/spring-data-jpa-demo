@@ -1,5 +1,6 @@
-package com.cooperative.entity.ch3;
+package com.cooperative.controller.ch3.form;
 
+import com.cooperative.controller.ch3.validate.WorkOverTime;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -24,4 +25,7 @@ public class WorkInfoForm {
 
     @Email(message = "不是邮箱格式")
     private String email;
+
+    @WorkOverTime(max=5)
+    Integer workTime;
 }

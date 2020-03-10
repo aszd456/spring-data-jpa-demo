@@ -1,6 +1,6 @@
 package com.cooperative.controller.ch3;
 
-import com.cooperative.entity.ch3.WorkInfoForm;
+import com.cooperative.controller.ch3.form.WorkInfoForm;
 import com.cooperative.entity.order.Order;
 import com.cooperative.entity.user.User;
 import com.google.common.collect.Lists;
