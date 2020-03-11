@@ -9,21 +9,26 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Map;
 
+/**
+ * @JsonView
+ * 1.使用接口来声明多个视图
+ * 2.在值对象的get方法上指定视图
+ * 3.在Controller的方法上指定视图
+ */
 @Data
 @Entity
-//@JsonIgnoreProperties(ignoreUnknown = true, value = {"id", "password"})
+@JsonIgnoreProperties(ignoreUnknown = true, value = {"hibernateLazyInitializer"})
 public class User extends BaseMode implements Serializable {
 
-//    public interface IdNameView extends IdView {
-//    }
-//
-//    ;
+    public interface IdNameView extends IdView {
+    }
 
     private static final long serialVersionUID = -501311792025981521L;
 
-//    @JsonView(IdNameView.class)
+    @JsonView(IdNameView.class)
     @Column
     private String name;
 
@@ -31,20 +36,11 @@ public class User extends BaseMode implements Serializable {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @JsonIgnore
     @Column
     private String password;
 
-//    Map<String, Object> map = Maps.newHashMap();
-//
-//    @JsonAnySetter
-//    private void other(String key, Object value) {
-//        map.put(key, value);
-//    }
-//
-//    @JsonAnyGetter
-//    public Map<String, Object> getOtherProperties() {
-//        return map;
-//    }
+    @Column
+    private BigDecimal salary;
+
 
 }

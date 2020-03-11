@@ -19,7 +19,7 @@ public class URLMapperController {
 
     @GetMapping("saveUser")
     @ResponseBody
-    public User saveUser(){
+    public User saveUser() {
         User user = new User();
         user.setName("莎莉B");
         user.setPassword("123456");
@@ -36,15 +36,28 @@ public class URLMapperController {
     @RequestMapping(path = "/user/{id}.json", method = RequestMethod.GET)
     @ResponseBody
     public User getById(@PathVariable Integer id) {
-        return userService.getUserById(id);
+        User user = userService.getUserById(id);
+        return user;
     }
 
+    /**
+     * produces：它的作用是指定返回值类型，不但可以设置返回值类型还可以设定返回值的字符编码；
+     * application/json;charset=utf-8
+     *使用@responseBody可以忽略
+     * @param userId
+     * @return
+     */
     @GetMapping(path = "/{userId}.json", produces = "application/json")
     @ResponseBody
     public User getUserById(@PathVariable Integer userId) {
         return userService.getUserById(userId);
     }
 
+    /**
+     * consumes： 指定处理请求的提交内容类型（Content-Type），例如application/json, text/html;
+     * 方法仅处理request Content-Type为“application/json”类型的请求
+     * @return
+     */
     @GetMapping(value = "/consumes/test.json", consumes = "application/json")
     @ResponseBody
     public User forJson() {

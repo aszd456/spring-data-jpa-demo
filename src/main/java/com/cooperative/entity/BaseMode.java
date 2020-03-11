@@ -2,6 +2,7 @@ package com.cooperative.entity;
 
 import com.cooperative.entity.user.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
@@ -12,12 +13,9 @@ import java.util.Date;
 @MappedSuperclass
 public class BaseMode {
 
-//    public interface IdView {
-//    }
-//
-//    ;
+    public interface IdView {}
 
-//    @JsonView(User.IdView.class)
+    @JsonView(User.IdView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

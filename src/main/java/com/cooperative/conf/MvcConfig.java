@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * 格式化
  * 等等定制接口
  */
-//@Configuration
+@Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
     /**
@@ -30,7 +30,7 @@ public class MvcConfig implements WebMvcConfigurer {
      * @param registry
      */
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new SessionHandlerInterceptor()).addPathPatterns("/admin/**");
+//        registry.addInterceptor(new SessionHandlerInterceptor()).addPathPatterns("/admin/**").excludePathPatterns("/json/**");;
     }
 
     /**
@@ -70,7 +70,7 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/index.html").setViewName("/index.btl");
-        registry.addRedirectViewController("/**/*.do", "/index.html");
+//        registry.addViewController("/index.html").setViewName("/index.btl");
+//        registry.addRedirectViewController("/**/*.do", "/index.html");
     }
 }

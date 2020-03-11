@@ -17,6 +17,4 @@ public class Department extends BaseMode implements Serializable {
     @Column
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "department")
-    private Set<User> users = new HashSet<User>();
 }

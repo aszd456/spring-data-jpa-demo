@@ -27,7 +27,7 @@ public class ModelAndViewController {
         User userInfo =  userService.getUserById(userId);
         //model.addAttribute(userInfo); 与下面一行作用一样，但这会有潜在问题
         model.addAttribute("user", userInfo);
-        return "userInfo";
+        return "/thymeleaf/userInfo";
     }
     /**
      * 使用freemaker模板测试，freemaker会寻找/userInfo.ftl 模板
