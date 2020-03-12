@@ -1,6 +1,7 @@
 package com.cooperative.entity.user;
 
 import com.cooperative.entity.BaseMode;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,5 +17,9 @@ public class Department extends BaseMode implements Serializable {
 
     @Column
     private String name;
+
+//    @OneToMany(mappedBy="department")
+//    @JsonIgnore
+//    private Set<User> users = new HashSet<User>();
 
 }

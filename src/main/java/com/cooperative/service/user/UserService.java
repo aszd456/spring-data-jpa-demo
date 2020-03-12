@@ -32,19 +32,16 @@ public class UserService {
     /**
      * JPA EntityManager的四个主要方法 ——persist,merge,refresh和remove
      * persist 方法可以将实例转换为 managed( 托管 ) 状态。在调用 flush() 方法或提交事物后，实例将会被插入到数据库中。
-     *
+     * <p>
      * merge 方法的主要作用是将用户对一个 detached（独立） 状态实体的修改进行归档，归档后将产生一个新的 managed 状态对象。
-     *
+     * <p>
      * refresh 方法可以保证当前的实例与数据库中的实例的内容一致。
-     *
+     * <p>
      * remove 方法可以将实体转换为 removed 状态，并且在调用 flush() 方法或提交事物后删除数据库中的数据。
      */
 
-    public void updateUser() {
-        User user = new User();
-        user.setName("hhaancd");
-        user.setCreateTime(new Date());
-        em.merge(user);//merge() 用于处理 Entity 的同步。即数据库的插入和更新操作。
+    public int updateUser(String name, Integer id) {
+        return userDao.updateName(name,id);
     }
 
     public User findUser(int id) {
@@ -58,7 +55,8 @@ public class UserService {
     }
 
     public List<User> getAllUser(int page, int size) {
-        PageRequest pageable = PageRequest.of(page, size);
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        PageRequest pageable = PageRequest.of(page, size, sort);
         Page<User> pageObject = userDao.findAll(pageable);
         int totalPage = pageObject.getTotalPages();
         int realSize = pageObject.getSize();
@@ -74,7 +72,7 @@ public class UserService {
 
     public User getUser(String name, Integer departmentId) {
 //		getUser(departmentId);
-        return userDao.nativeQuery2(name, departmentId);
+        return userDao.nativeQuery(name, departmentId);
 //		return userDao.findUserByDepartment(name, departmentId);
     }
 
@@ -90,19 +88,19 @@ public class UserService {
 
     public Page<User> queryUser2(Integer departmentId, Pageable page) {
         //构造JPQL和实际的参数
-        StringBuilder baseJpql = new StringBuilder("from User u where 1=1 ");
+        StringBuilder baseSql = new StringBuilder("from user u where 1=1 ");
         Map<String, Object> paras = new HashMap<String, Object>();
         if (departmentId != null) {
-            baseJpql.append("and  u.department.id=:deptId");
+            baseSql.append("and  u.department_id=:deptId");
             paras.put("deptId", departmentId);
         }
         //查询满足条件的总数
-        long count = getQueryCount(baseJpql, paras);
+        long count = getQueryCount(baseSql, paras);
         if (count == 0) {
             return new PageImpl(Collections.emptyList(), page, 0);
         }
         //查询满足条件结果集
-        List list = getQueryResult(baseJpql, paras, page);
+        List list = getQueryResult(baseSql, paras, page);
 
 
         //返回结果
@@ -124,8 +122,8 @@ public class UserService {
         return list;
     }
 
-    private List getQueryResult(StringBuilder baseJpql, Map<String, Object> paras, Pageable page) {
-        Query query = em.createQuery("select u " + baseJpql.toString());
+    private List getQueryResult(StringBuilder baseSql, Map<String, Object> paras, Pageable page) {
+        Query query = em.createNativeQuery("select * " + baseSql.toString());
         setQueryParameter(query, paras);
         query.setFirstResult((int) page.getOffset());
         query.setMaxResults(page.getPageNumber());
@@ -133,8 +131,8 @@ public class UserService {
         return list;
     }
 
-    private Long getQueryCount(StringBuilder baseJpql, Map<String, Object> paras) {
-        Query query = em.createQuery("select count(1) " + baseJpql.toString());
+    private Long getQueryCount(StringBuilder baseSql, Map<String, Object> paras) {
+        Query query = em.createNativeQuery("select count(1) " + baseSql.toString());
         setQueryParameter(query, paras);
         Number number = (Number) query.getSingleResult();
         return number.longValue();

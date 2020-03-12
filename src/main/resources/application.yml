@@ -1,3 +1,8 @@
+#server.servlet.context-path=/  应用上下文
+#server.address 服务器IP绑定地址
+#server.session.timeout 会话过期时间，单位秒
+#server.error.path 服务器出错后的处理路径/error
+#server.port 监听端口
 server:
   port: 8080
 spring:
@@ -9,7 +14,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: false
+    show-sql: true
   thymeleaf:
     #关闭 Thymeleaf 的缓存开发过程中无需重启
     cache: false
