@@ -119,8 +119,8 @@
 
         <h2>ITDragon Thymeleaf 语法</h2>
         <!--th:text 设置当前元素的文本内容，常用，优先级不高-->
-        <p th:text="${thText}"/>
-        <p th:utext="${thUText}"/>
+        <p th:text="${thText}"></p>
+        <p th:utext="${thUText}"></p>
 
         <!--th:value 设置当前元素的value值，常用，优先级仅比th:text高-->
         <input type="text" th:value="${thValue}"/>
@@ -128,10 +128,10 @@
         <!--th:each 遍历列表，常用，优先级很高，仅此于代码块的插入-->
         <!--th:each 修饰在div上，则div层重复出现，若只想p标签遍历，则修饰在p标签上-->
         <div th:each="message : ${thEach}"> <!-- 遍历整个div-p，不推荐-->
-            <p th:text="${message}"/>
+            <p th:text="${message}"></p>
         </div>
         <div> <!--只遍历p，推荐使用-->
-            <p th:text="${message}" th:each="message : ${thEach}"/>
+            <p th:text="${message}" th:each="message : ${thEach}"></p>
         </div>
 
         <!--th:if 条件判断，类似的有th:switch，th:case，优先级仅次于th:each, 其中#strings是变量表达式的内置方法-->
@@ -141,22 +141,24 @@
         <h2>ITDragon Thymeleaf 内置方法</h2>
         <h3>#strings </h3>
         <div th:if="${not #strings.isEmpty(itdragonStr)}">
-            <p>Old Str : <span th:text="${itdragonStr}"/></p>
-            <p>toUpperCase : <span th:text="${#strings.toUpperCase(itdragonStr)}"/></p>
-            <p>toLowerCase : <span th:text="${#strings.toLowerCase(itdragonStr)}"/></p>
-            <p>equals : <span th:text="${#strings.equals(itdragonStr, 'itdragonblog')}"/></p>
-            <p>equalsIgnoreCase : <span th:text="${#strings.equalsIgnoreCase(itdragonStr, 'itdragonblog')}"/></p>
-            <p>indexOf : <span th:text="${#strings.indexOf(itdragonStr, 'r')}"/></p>
-            <p>substring : <span th:text="${#strings.substring(itdragonStr, 2, 8)}"/></p>
-            <p>replace : <span th:text="${#strings.replace(itdragonStr, 'it', 'IT')}"/></p>
-            <p>startsWith : <span th:text="${#strings.startsWith(itdragonStr, 'it')}"/></p>
-            <p>contains : <span th:text="${#strings.contains(itdragonStr, 'IT')}"/></p>
+            <p>Old Str : <span th:text="${itdragonStr}"></span></p>
+            <p>toUpperCase : <span th:text="${#strings.toUpperCase(itdragonStr)}"></span></p>
+            <p>toLowerCase : <span th:text="${#strings.toLowerCase(itdragonStr)}"></span></p>
+            <p>equals : <span th:text="${#strings.equals(itdragonStr, 'itdragonblog')}"></span></p>
+            <p>equalsIgnoreCase : <span th:text="${#strings.equalsIgnoreCase(itdragonStr, 'itdragonblog')}"></span></p>
+            <p>indexOf : <span th:text="${#strings.indexOf(itdragonStr, 'r')}"></span></p>
+            <p>substring : <span th:text="${#strings.substring(itdragonStr, 2, 8)}"></span></p>
+            <p>replace : <span th:text="${#strings.replace(itdragonStr, 'it', 'IT')}"></span></p>
+            <p>startsWith : <span th:text="${#strings.startsWith(itdragonStr, 'it')}"></span></p>
+            <p>contains : <span th:text="${#strings.contains(itdragonStr, 'IT')}"></span></p>
         </div>
 
         <h3>#numbers </h3>
         <div>
-            <p>formatDecimal 整数部分随意，小数点后保留两位，四舍五入: <span th:text="${#numbers.formatDecimal(itdragonNum, 0, 2)}"/></p>
-            <p>formatDecimal 整数部分保留五位数，小数点后保留两位，四舍五入: <span th:text="${#numbers.formatDecimal(itdragonNum, 5, 2)}"/></p>
+            <p>formatDecimal 整数部分随意，小数点后保留两位，四舍五入: <span th:text="${#numbers.formatDecimal(itdragonNum, 0, 2)}"></span>
+            </p>
+            <p>formatDecimal 整数部分保留五位数，小数点后保留两位，四舍五入: <span
+                    th:text="${#numbers.formatDecimal(itdragonNum, 5, 2)}"></span></p>
         </div>
 
         <h3>#bools </h3>
@@ -166,35 +168,35 @@
 
         <h3>#arrays </h3>
         <div th:if="${not #arrays.isEmpty(itdragonArray)}">
-            <p>length : <span th:text="${#arrays.length(itdragonArray)}"/></p>
-            <p>contains : <span th:text="${#arrays.contains(itdragonArray, 5)}"/></p>
-            <p>containsAll : <span th:text="${#arrays.containsAll(itdragonArray, itdragonArray)}"/></p>
+            <p>length : <span th:text="${#arrays.length(itdragonArray)}"></span></p>
+            <p>contains : <span th:text="${#arrays.contains(itdragonArray, 5)}"></span></p>
+            <p>containsAll : <span th:text="${#arrays.containsAll(itdragonArray, itdragonArray)}"></span></p>
         </div>
         <h3>#lists </h3>
         <div th:if="${not #lists.isEmpty(itdragonList)}">
-            <p>size : <span th:text="${#lists.size(itdragonList)}"/></p>
-            <p>contains : <span th:text="${#lists.contains(itdragonList, 0)}"/></p>
-            <p>sort : <span th:text="${#lists.sort(itdragonList)}"/></p>
+            <p>size : <span th:text="${#lists.size(itdragonList)}"></span></p>
+            <p>contains : <span th:text="${#lists.contains(itdragonList, 0)}"></span></p>
+            <p>sort : <span th:text="${#lists.sort(itdragonList)}"></span></p>
         </div>
         <h3>#maps </h3>
         <div th:if="${not #maps.isEmpty(itdragonMap)}">
-            <p>size : <span th:text="${#maps.size(itdragonMap)}"/></p>
-            <p>containsKey : <span th:text="${#maps.containsKey(itdragonMap, 'thName')}"/></p>
-            <p>containsValue : <span th:text="${#maps.containsValue(itdragonMap, '#maps')}"/></p>
+            <p>size : <span th:text="${#maps.size(itdragonMap)}"></span></p>
+            <p>containsKey : <span th:text="${#maps.containsKey(itdragonMap, 'thName')}"></span></p>
+            <p>containsValue : <span th:text="${#maps.containsValue(itdragonMap, '#maps')}"></span></p>
         </div>
         <h3>#dates </h3>
         <div>
-            <p>format : <span th:text="${#dates.format(itdragonDate)}"/></p>
-            <p>custom format : <span th:text="${#dates.format(itdragonDate, 'yyyy-MM-dd HH:mm:ss')}"/></p>
-            <p>day : <span th:text="${#dates.day(itdragonDate)}"/></p>
-            <p>month : <span th:text="${#dates.month(itdragonDate)}"/></p>
-            <p>monthName : <span th:text="${#dates.monthName(itdragonDate)}"/></p>
-            <p>year : <span th:text="${#dates.year(itdragonDate)}"/></p>
-            <p>dayOfWeekName : <span th:text="${#dates.dayOfWeekName(itdragonDate)}"/></p>
-            <p>hour : <span th:text="${#dates.hour(itdragonDate)}"/></p>
-            <p>minute : <span th:text="${#dates.minute(itdragonDate)}"/></p>
-            <p>second : <span th:text="${#dates.second(itdragonDate)}"/></p>
-            <p>createNow : <span th:text="${#dates.createNow()}"/></p>
+            <p>format : <span th:text="${#dates.format(itdragonDate)}"></span></p>
+            <p>custom format : <span th:text="${#dates.format(itdragonDate, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+            <p>day : <span th:text="${#dates.day(itdragonDate)}"></span></p>
+            <p>month : <span th:text="${#dates.month(itdragonDate)}"></span></p>
+            <p>monthName : <span th:text="${#dates.monthName(itdragonDate)}"></span></p>
+            <p>year : <span th:text="${#dates.year(itdragonDate)}"></span></p>
+            <p>dayOfWeekName : <span th:text="${#dates.dayOfWeekName(itdragonDate)}"></span></p>
+            <p>hour : <span th:text="${#dates.hour(itdragonDate)}"></span></p>
+            <p>minute : <span th:text="${#dates.minute(itdragonDate)}"></span></p>
+            <p>second : <span th:text="${#dates.second(itdragonDate)}"></span></p>
+            <p>createNow : <span th:text="${#dates.createNow()}"></span></p>
         </div>
 
 

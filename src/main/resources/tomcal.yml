@@ -1,0 +1,15 @@
+#server:
+#  tomcat:
+#    accesslog:
+#      #打开tomcat访问日志
+#      enabled: false
+#      #访问日志所在的目录
+#      directory: logs
+#    #允许HTTP请求缓存到请求队列的最大个数，默认不限制
+#    accept-count:
+#    #最大连接数
+#    max-connections:
+#    #最大工作线程数
+#    max-threads:
+#    #http post 内容最大长度
+#    max-http-form-post-size:

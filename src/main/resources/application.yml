@@ -9,7 +9,7 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/spring_boot2_js?useUnicode=true&zeroDateTimeBehavior=convertToNull&characterEncoding=utf8&useSSL=false
     username: root
-    password: 123456
+    password:
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
@@ -21,3 +21,22 @@ spring:
     encoding: UTF-8
     mode: LEGANCYHTML5
     suffix: .html
+  banner:
+    charset: UTF-8
+    location: classpath:banner.txt
+#    image:
+#      location: classpath:banner.gif
+#      width: 76
+#      height: 76
+#      margin: 2
+logging:
+  level:
+    root: info
+    org:
+      springframework: info
+    com:
+      cooperative: debug
+  file: my.log
+#  pattern:
+#    console: %level %date{HH:mm:ss} %logger{20}.%M %L :%m%n
+#    file: %level %date{ISO8601} [%thread]  %logger{20}.%M %L :%m%n

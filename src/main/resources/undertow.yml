@@ -1,0 +1,8 @@
+#server:
+#  undertow:
+#    accesslog:
+#      enabled: false  打开undertow日志默认false
+#      dir: logs 日志所在目录
+#    io-threads: 创建工作线程的IO线程
+#    worker-threads: 工作线程个数
+#    max-http-post-size: http post 内容最大长度
