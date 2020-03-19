@@ -18,7 +18,6 @@ public class DataSourceConf {
         HikariDataSource prod = getDataSource(env);
         prod.setMaximumPoolSize(2);
         return prod;
-
     }
 
     @Bean(name = "dataSource")
@@ -49,23 +48,3 @@ public class DataSourceConf {
     }
 }
 
-    /**
-     *
-
-    @Test
-    public void test() {
-        //创建容器
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-        //设置需要激活的环境
-        applicationContext.getEnvironment().setActiveProfiles("test");
-        //设置主配置类
-        applicationContext.register(MainProfileConfig.class);
-        //启动刷新容器
-        applicationContext.refresh();
-        String[] beanNamesForType = applicationContext.getBeanNamesForType(DataSource.class);
-        for (String name : beanNamesForType) {
-            System.out.println(name);
-        }
-        applicationContext.close();
-    }
-     */
