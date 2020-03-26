@@ -21,7 +21,7 @@
 
     @{...} 链接表达式，Link URL Expressions
 
-    #{...} 消息表达式，Message Expressions
+    #{...} 消息表达式，Message Expressions  用于国际化message.properties 属性读取
 
     ~{...} 代码块表达式，Fragment Expressions
 
@@ -93,6 +93,7 @@
             <p th:text="*{departmentId}"></p>
         </div>
         <!--
+        通过便利的变量名+Stat 来获取索引 是否是第一个或最后一个等。
         这里的interStat类似于jstl里面foreach的varStatus，可以获取到当前的迭代信息
         index: 当前迭代对象的index（从0开始计算）
         count: 当前迭代对象的个数（从1开始计算）
@@ -127,15 +128,28 @@
 
         <!--th:each 遍历列表，常用，优先级很高，仅此于代码块的插入-->
         <!--th:each 修饰在div上，则div层重复出现，若只想p标签遍历，则修饰在p标签上-->
-        <div th:each="message : ${thEach}"> <!-- 遍历整个div-p，不推荐-->
+        <div th:each="message : ${thEach}"  th:class="${messageStat.odd}? 'odd'"> <!-- 遍历整个div-p，不推荐-->
             <p th:text="${message}"></p>
         </div>
         <div> <!--只遍历p，推荐使用-->
             <p th:text="${message}" th:each="message : ${thEach}"></p>
         </div>
 
-        <!--th:if 条件判断，类似的有th:switch，th:case，优先级仅次于th:each, 其中#strings是变量表达式的内置方法-->
+        <!--th:if 条件判断，类似的有th:switch，th:case，优先级仅次于th:each, 其中#strings是变量表达式的内置方法
+            th:if 当条件为true则显示。
+            th:unless 当条件为false 则显示。
+        -->
+
         <p th:text="${thIf}" th:if="${not #strings.isEmpty(thIf)}"></p>
+        <p th:unless="!${flag}">unless 判断</p>
+
+        <!--
+        th:switch 我们可以通过switch来完成类似的条件表达式的操作。
+        -->
+        <div th:switch="${user.name}">
+            <p th:case="'ljk'">ljk</p>
+            <p th:case="'ljk1'">ljk1</p>
+        </div>
 
 
         <h2>ITDragon Thymeleaf 内置方法</h2>
@@ -205,6 +219,70 @@
         <!-- 也可以这样编写
         <div th:include="footer :: (${user.isAdmin}? #{footer.admin} : #{footer.normaluser})"></div>
         -->
+
+        <!--用于声明在a 标签上的href属性的链接 该语法会和@{…} 表达式一起使用。-->
+        <a href="../home.html" th:href="@{/}">返回首页</a>
+
+        <!--
+        th:class  用于声明在标签上class 属性信息。
+        -->
+        <p th:class=" 'even'? 'even' : 'odd'" th:text=" 'even'? 'even' : 'odd'"></p>
+
+        <!--
+        th:attr  用于声明html中或自定义属性信息。
+        -->
+        <!--
+        th:action 用于声明html from标签中action属性信息。
+        -->
+        <form action="subscribe.html" th:action="@{/subscribe}">
+            <input type="text" name="name" value="abc"/>
+        </form>
+
+        <!--
+        th:id  用于声明htm id属性信息。
+        -->
+        <p th:id="${id}"></p>
+
+        <!--
+        th:onclick 用于声明htm 中的onclick事件。
+        -->
+        <p th:onclick="'showUserInfo()'">点我</p>
+
+        <!--
+        th:selected 用于声明htm 中的selected属性信息。
+        -->
+        <select>
+            <option name="sex"></option>
+            <option th:selected="1 == ${sex}">男</option>
+            <option th:selected="0 == ${sex}">女</option>
+        </select>
+
+        <!--
+        th:src  用于声明htm 中的img中src属性信息。
+        -->
+        <img  title="GTVG logo" th:src="@{/images/gtvglogo.png}" />
+
+        <!--
+        th:style 用于声明htm中的标签 css的样式信息。
+        -->
+        <p th:style="'display:' + @{(${isShow} ? 'none' : 'block')} + ''"></p>
+
+        <!--
+        th:with 用于thymeleaf 模版页面中局部变量定义的使用。
+        -->
+        <p th:with="df='dd/MMM/yyyy HH:mm'">
+            Today is: <span th:text="${#dates.format(today,df)}">13 February 2011</span>
+        </p>
+        <div th:with="firstEle=${users[0]}">
+            <p>
+                第一个用户的名称是： <span th:text="${firstEle.name}"></span>.
+            </p>
+        </div>
+
+        <!--Elvis运算符
+            Elvis运算可以理解成简单的判断是否为null的三元运算的简写，如果值为null显示默认值，如果不为null 则显示原有的值
+        -->
+        <p>Age: <span th:text="${age}?: '年龄为nll'"></span></p>
 
     </body>
 </html>

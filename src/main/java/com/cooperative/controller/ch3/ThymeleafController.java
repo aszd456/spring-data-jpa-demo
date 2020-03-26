@@ -65,6 +65,8 @@ public class ThymeleafController {
         model.addAttribute("itdragonMap", itdragonMap);
         model.addAttribute("itdragonDate", new Date());
         model.addAttribute("itdragonNum", 888.888D);
+
+        model.addAttribute("flag",true);
         return "thymeleaf/index";
     }
 /**
