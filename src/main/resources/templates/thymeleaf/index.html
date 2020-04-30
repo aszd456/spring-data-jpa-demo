@@ -284,5 +284,21 @@
         -->
         <p>Age: <span th:text="${age}?: '年龄为nll'"></span></p>
 
+        <!--
+        内联 如何使用内连操作
+        通过 在父标签声明 th:inline=“text” 来开启内联操作。当然如果想整个页面使用可以直接声明在body上即可。具体使用方式如下面代码所示。
+        [[…]]对应于th:text，[(…)]对应于th:utext
+        -->
+        <div th:inline="text">
+            <p>Hello, [[${user.name}]]!</p>
+        </div>
+
+        <!--禁用内联操作
+        在父标签或者本标签上声明th:inline="none"来禁用内联的操作
+        -->
+        <p th:inline="none">A double array looks like this: [[1, 2, 3], [4, 5]]!</p>
+
+
+
     </body>
 </html>
