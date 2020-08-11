@@ -15,11 +15,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    open-in-view: false
   thymeleaf:
     #关闭 Thymeleaf 的缓存开发过程中无需重启
     cache: false
     encoding: UTF-8
-    mode: HTML5
+    mode: HTML
     suffix: .html
   banner:
     charset: UTF-8
