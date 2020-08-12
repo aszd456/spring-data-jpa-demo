@@ -4,6 +4,7 @@ import com.cooperative.entity.user.User;
 import com.cooperative.service.ch3.UserService;
 import com.cooperative.service.ch3.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,7 +48,7 @@ public class URLMapperController {
      * @param userId
      * @return
      */
-    @GetMapping(path = "/{userId}.json", produces = "application/json")
+    @GetMapping(path = "/{userId}.json", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public User getUserById(@PathVariable Integer userId) {
         return userService.getUserById(userId);

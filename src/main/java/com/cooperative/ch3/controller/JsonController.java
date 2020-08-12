@@ -52,7 +52,7 @@ public class JsonController {
     public @ResponseBody
     Map datetime(Date date) {
         //MvcConfigurer 配置了处理查询参数到日期类型的映射
-        Map map = new HashMap();
+        Map map = new HashMap(16);
         map.put("time", date);
         return map;
     }

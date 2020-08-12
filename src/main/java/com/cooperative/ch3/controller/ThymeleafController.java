@@ -59,14 +59,14 @@ public class ThymeleafController {
         model.addAttribute("itdragonBool", true);
         model.addAttribute("itdragonArray", new Integer[]{1, 2, 3, 4});
         model.addAttribute("itdragonList", Arrays.asList(1, 3, 2, 4, 0));
-        Map itdragonMap = new HashMap();
+        Map itdragonMap = new HashMap(16);
         itdragonMap.put("thName", "${#...}");
         itdragonMap.put("desc", "变量表达式内置方法");
         model.addAttribute("itdragonMap", itdragonMap);
         model.addAttribute("itdragonDate", new Date());
         model.addAttribute("itdragonNum", 888.888D);
 
-        model.addAttribute("flag",true);
+        model.addAttribute("flag", true);
         return "thymeleaf/index";
     }
 /**
@@ -162,14 +162,16 @@ public class ThymeleafController {
         ArrayList<Integer> list = new ArrayList<Integer>();
         Vector<Integer> vector = new Vector<Integer>();
         long start = System.currentTimeMillis();
-        for(int i=0;i<100000;i++)
+        for (int i = 0; i < 100000; i++) {
             list.add(i);
+        }
         long end = System.currentTimeMillis();
-        System.out.println("ArrayList进行100000次插入操作耗时："+(end-start)+"ms");
+        System.out.println("ArrayList进行100000次插入操作耗时：" + (end - start) + "ms");
         start = System.currentTimeMillis();
-        for(int i=0;i<100000;i++)
+        for (int i = 0; i < 100000; i++) {
             vector.add(i);
+        }
         end = System.currentTimeMillis();
-        System.out.println("Vector进行100000次插入操作耗时："+(end-start)+"ms");
+        System.out.println("Vector进行100000次插入操作耗时：" + (end - start) + "ms");
     }
 }
