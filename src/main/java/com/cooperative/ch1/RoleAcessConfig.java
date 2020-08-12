@@ -34,8 +34,12 @@ public class RoleAcessConfig {
                 throw new RuntimeException("Can not Access " + ms.getMethod());
             }
         }
+
+        Object[] args = pjp.getArgs();
+        System.out.println("args:" + Arrays.asList(args));
         // 继续处理原有调用
         Object o = pjp.proceed();
+        System.out.println("return :" + o);
         return o;
     }
 
@@ -44,6 +48,9 @@ public class RoleAcessConfig {
             return true;
         } else {
             // 取出当前用户对应的所有角色，从数据库查询角色是否有访问functionName的权限。
+            if (functionName.equals("test")) {
+                return true;
+            }
             return false;
         }
     }
@@ -54,17 +61,17 @@ public class RoleAcessConfig {
      * @return
      * @throws Throwable
      */
-    @Around("@within(org.springframework.stereotype.Controller) ")
-    public Object simpleAop(final ProceedingJoinPoint pjp) throws Throwable {
-        try {
-            Object[] args = pjp.getArgs();
-            System.out.println("args:" + Arrays.asList(args));
-            Object o = pjp.proceed();
-            System.out.println("return :" + o);
-            return o;
-
-        } catch (Throwable e) {
-            throw e;
-        }
-    }
+//    @Around("@within(org.springframework.stereotype.Controller) ")
+//    public Object simpleAop(final ProceedingJoinPoint pjp) throws Throwable {
+//        try {
+//            Object[] args = pjp.getArgs();
+//            System.out.println("args:" + Arrays.asList(args));
+//            Object o = pjp.proceed();
+//            System.out.println("return :" + o);
+//            return o;
+//
+//        } catch (Throwable e) {
+//            throw e;
+//        }
+//    }
 }

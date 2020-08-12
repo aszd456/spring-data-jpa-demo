@@ -43,3 +43,18 @@ logging:
 #  pattern:
 #    console: %level %date{HH:mm:ss} %logger{20}.%M %L :%m%n
 #    file: %level %date{ISO8601} [%thread]  %logger{20}.%M %L :%m%n
+
+wxpayconfig:
+  #商户应用appId
+  appID:
+  #商户ID
+  mchID:
+  #小程序 appSecret
+  appSecret:
+  #商户key：api秘钥（32位）
+  key:
+  #回调接口
+  notify_url: https://www.xxx.com/api/wxMiniCallBack
+  refund_url: https://www.xxx.com/api/wxMiniRefundCallBack
+  #证书路径 classpath:apiclient_cert.p12
+  certPath: 
