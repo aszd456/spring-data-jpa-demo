@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 /**
  * Spring Boot 的一个AOP实现，用于权限
+ * @author zhouliansheng
  */
 @Slf4j
 @Aspect

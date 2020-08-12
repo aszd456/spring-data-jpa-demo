@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 1 更改getCreditLevel名字为getCreditLevelTest
  * 2 /usercredit/{id} 更改为 /usercredit/{id1}
  *
+ * @author Administrator
  */
 @RestController
 public class UserReditRestController {

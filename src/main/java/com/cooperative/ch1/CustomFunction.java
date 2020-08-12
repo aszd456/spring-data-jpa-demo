@@ -22,7 +22,7 @@ import java.lang.annotation.*;
  * ElementType 这个枚举类型的常量提供了一个简单的分类：
  * 注解可能出现在Java程序中的语法位置（这些常量与元注解类型(@Target)一起指定在何处写入注解的合法位置）
  *
- *
+ * @author zhouliansheng
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
