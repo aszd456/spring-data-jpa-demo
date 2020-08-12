@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DataSource {
-    String value();
+    String value() default "core";
 
     /**
      * 默认数据库

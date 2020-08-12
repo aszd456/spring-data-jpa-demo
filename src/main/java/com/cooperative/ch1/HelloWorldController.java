@@ -10,8 +10,8 @@ public class HelloWorldController {
 
 
     @RequestMapping("/sayhello.html")
-    @CustomFunction("test")
     @ResponseBody
+    @CustomFunction("test")
     public String say(String name) {
         return "hello " + name;
     }
