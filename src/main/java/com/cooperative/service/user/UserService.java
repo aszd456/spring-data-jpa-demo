@@ -3,6 +3,7 @@ package com.cooperative.service.user;
 import com.cooperative.dao.user.UserDao;
 import com.cooperative.entity.user.Department;
 import com.cooperative.entity.user.User;
+import com.cooperative.service.CreditSystemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -24,6 +25,9 @@ public class UserService {
     @Autowired
     EntityManager em;
 
+    @Autowired
+    CreditSystemService creditSystemService;
+
 
     public User getUserById(Integer id) {
         return userDao.getOne(id);
@@ -41,7 +45,7 @@ public class UserService {
      */
 
     public int updateUser(String name, Integer id) {
-        return userDao.updateName(name,id);
+        return userDao.updateName(name, id);
     }
 
     public User findUser(int id) {
@@ -144,4 +148,12 @@ public class UserService {
         }
     }
 
+    public int getCredit(int userId) {
+        return creditSystemService.getUserCredit(userId);
+    }
+
+    public boolean updateUser(User user) {
+        int ret = userDao.updateName(user.getName(), user.getId());
+        return ret == 1;
+    }
 }
