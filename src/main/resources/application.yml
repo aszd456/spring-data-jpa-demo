@@ -9,13 +9,16 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/spring_boot2_js?useUnicode=true&zeroDateTimeBehavior=convertToNull&characterEncoding=utf8&useSSL=false
     username: root
-    password: 123456
+    password: 
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     open-in-view: false
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/test
   thymeleaf:
     #关闭 Thymeleaf 的缓存开发过程中无需重启
     cache: false

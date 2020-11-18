@@ -4,8 +4,9 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.exception.ExcelDataConvertException;
 import com.alibaba.excel.metadata.CellExtra;
-import com.alibaba.fastjson.JSON;
+import com.cooperative.unit.JacksonUtil;
 import com.google.common.collect.Lists;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,14 +28,16 @@ public class NoModelDataListener extends AnalysisEventListener<Map<Integer, Stri
 
     List<Map<Integer, String>> list = Lists.newArrayList();
 
+    @SneakyThrows
     @Override
     public void invokeHeadMap(Map<Integer, String> headMap, AnalysisContext context) {
-        LOGGER.info("解析到一条头数据:{}", JSON.toJSON(headMap));
+        LOGGER.info("解析到一条头数据:{}", JacksonUtil.objToJson(headMap));
     }
 
+    @SneakyThrows
     @Override
     public void invoke(Map<Integer, String> data, AnalysisContext analysisContext) {
-        LOGGER.info("解析到一条数据:{}", JSON.toJSONString(data));
+        LOGGER.info("解析到一条数据:{}", JacksonUtil.objToJson(data));
         list.add(data);
     }
 
@@ -53,9 +56,10 @@ public class NoModelDataListener extends AnalysisEventListener<Map<Integer, Stri
         }
     }
 
+    @SneakyThrows
     @Override
     public void extra(CellExtra extra, AnalysisContext context) {
-        LOGGER.info("读取到了一条额外信息:{}", JSON.toJSONString(extra));
+        LOGGER.info("读取到了一条额外信息:{}", JacksonUtil.objToJson(extra));
         switch (extra.getType()) {
             case COMMENT:
                 LOGGER.info("额外信息是批注,在rowIndex:{},columnIndex;{},内容是:{}", extra.getRowIndex(), extra.getColumnIndex(), extra.getText());

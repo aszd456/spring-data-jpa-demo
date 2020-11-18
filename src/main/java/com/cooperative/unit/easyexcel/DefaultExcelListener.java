@@ -4,8 +4,9 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.exception.ExcelDataConvertException;
 import com.alibaba.excel.metadata.CellExtra;
-import com.alibaba.fastjson.JSON;
+import com.cooperative.unit.JacksonUtil;
 import com.google.common.collect.Lists;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,9 +26,10 @@ public class DefaultExcelListener<T> extends AnalysisEventListener<T> {
 
     private final List<T> rows = Lists.newArrayList();
 
+    @SneakyThrows
     @Override
     public void invokeHeadMap(Map<Integer, String> headMap, AnalysisContext context) {
-        log.info("解析到一条头数据:{}", JSON.toJSON(headMap));
+        log.info("解析到一条头数据:{}", JacksonUtil.objToJson(headMap));
     }
 
     @Override
@@ -65,9 +67,10 @@ public class DefaultExcelListener<T> extends AnalysisEventListener<T> {
      * @param extra
      * @param context
      */
+    @SneakyThrows
     @Override
     public void extra(CellExtra extra, AnalysisContext context) {
-        log.info("读取到了一条额外信息:{}", JSON.toJSONString(extra));
+        log.info("读取到了一条额外信息:{}", JacksonUtil.objToJson(extra));
         switch (extra.getType()) {
             case COMMENT:
                 log.info("额外信息是批注,在rowIndex:{},columnIndex;{},内容是:{}", extra.getRowIndex(), extra.getColumnIndex(), extra.getText());
