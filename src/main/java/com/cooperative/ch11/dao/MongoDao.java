@@ -90,7 +90,7 @@ public abstract class MongoDao<T> {
     }
 
     public List<T> queryListByCriteria(Query query) {
-        return mongoTemplate.find(query, getEntityClass());
+        return mongoTemplate.find(query, this.getEntityClass());
     }
 
     /**
