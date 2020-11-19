@@ -2,6 +2,7 @@ package com.cooperative.ch11.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import java.util.List;
  * @Author: zhouliansheng
  * @Date: 2020/11/19 0:42
  * @Document(collection = "test")指定集合，不指定会新建跟类名一样的集合baike
+ * @CompoundIndex(def = "{'userId':1,'desc':-1}") 复合索引
+ * @
  */
 @Data
 @Document(collection = "test")
@@ -29,4 +32,10 @@ public class Baike {
     private Date crateDate = null;
     private Date updateDate = null;
     private int status = 0;
+
+    /**
+     * 索引
+     */
+    @Indexed
+    private String userId;
 }
