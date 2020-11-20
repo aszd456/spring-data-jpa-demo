@@ -32,6 +32,7 @@ public class Baike {
     private Date crateDate = null;
     private Date updateDate = null;
     private int status = 0;
+    private String userName;
 
     /**
      * 索引
