@@ -36,7 +36,9 @@ public class Baike {
 
     /**
      * 索引
+     * Spring Data MongoDB3.X 后的版本不再支持自动创建索引，如果要坚持使用@Indexed注解需要额外的设置，
+     * 并建议我们在手动创建索引
      */
-    @Indexed
-    private String userId;
+//    @Indexed
+//    private String userId;
 }

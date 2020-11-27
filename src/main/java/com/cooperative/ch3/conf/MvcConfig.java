@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * 跨域访问配置
  * 格式化
  * 等等定制接口
+ * @author Administrator
  */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
@@ -64,7 +65,7 @@ public class MvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**").allowedOrigins("http://qiandu.com").allowedMethods("POST", "GET");
+//        registry.addMapping("/api/**").allowedOrigins("http://qiandu.com").allowedMethods("POST", "GET");
     }
 
     /**

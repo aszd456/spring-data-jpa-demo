@@ -8,6 +8,9 @@ import org.springframework.boot.system.JavaVersion;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
+/**
+ * @author Administrator
+ */
 @Configuration
 @ConditionalOnJava(range = ConditionalOnJava.Range.EQUAL_OR_NEWER, value = JavaVersion.EIGHT)
 public class EnvConfig implements BeanPostProcessor {
@@ -20,6 +23,7 @@ public class EnvConfig implements BeanPostProcessor {
         return env.getProperty("server.port", Integer.class);
     }
 
+    @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         if (bean instanceof URLTestBean) {
             System.out.println("=========== " + beanName);

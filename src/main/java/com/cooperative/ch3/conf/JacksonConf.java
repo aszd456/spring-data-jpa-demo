@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * jackson全局配置
+ * @author Administrator
  */
 @Configuration
 public class JacksonConf {

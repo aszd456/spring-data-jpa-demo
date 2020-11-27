@@ -3,6 +3,9 @@ package com.cooperative.ch7.conf;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author Administrator
+ */
 @ConfigurationProperties("server")
 @Configuration
 public class ServerConfig {

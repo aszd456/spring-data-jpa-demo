@@ -7,6 +7,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
+/**
+ * @author Administrator
+ */
 @Configuration
 public class MobileEncryptCondition {
     @Bean
@@ -17,6 +20,7 @@ public class MobileEncryptCondition {
 
     static class EncryptCondition implements Condition {
 
+        @Override
         public boolean matches(ConditionContext ctx, AnnotatedTypeMetadata metadata) {
 
             //获取ioc使用的beanFactory
