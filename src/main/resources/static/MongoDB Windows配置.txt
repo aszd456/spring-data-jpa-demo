@@ -1,0 +1,41 @@
+MongoDB安装-->选择自定义安装-->取消图形界面管理工具
+
+MongoDB配置
+	方式一：
+		进入mongodb安装目录的bin目录下，通过命令行启动mongodb服务器：mongod --dbpath "D:\Program Files\MongoDB\data"
+		运行成功，在浏览器上访问：localhost:27017（27017为mongodb的默认端口号）
+		如果新安装mangodb后初次运行失败，需要在任务管理器中关闭正在运行的mongodb进程，
+		并删除data文件夹下的mongod.lock文件然后重新运行mongodb
+
+	方式二：
+		配置本地windows mongodb服务
+			在安装的根目录下新建一个mongod.cfg文件，文件中的内容为：
+			--------------------分割线--------------------------------
+			#数据库数据存储路径，注意改成你自己的存储路径 
+			dbpath=D:\Program Files\MongoDB\data
+			#日志输出文件路径  
+			logpath=D:\Program Files\MongoDB\log\mongo.log  
+			#错误日志采用追加模式  
+			logappend=true  
+			#启用日志文件，默认启用
+			journal=true  
+			#这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false  
+			quiet=true  
+			#端口号 默认为27017
+			port=27017	
+			----------------------------------
+			文件创建完成之后，使用管理员模式运行命令行，进入mongodb安装目录的bin目录下执行：
+				mongod.exe --config "D:\Program Files\MongoDB\mongod.cfg" --install --serviceName "MongoDB" 
+
+				--config：依据的配置文件。
+				--install：创建
+				--serviceName：服务名称。	
+
+			执行上述命令之后执行 net start MongoDB 启动mongodb服务
+				
+			启动MongoDB服务
+			net start MongoDB
+			关闭MongoDB服务
+			net stop MongoDB
+			移除 MongoDB 服务
+			D:\MongoDB\bin\mongod.exe --remove
