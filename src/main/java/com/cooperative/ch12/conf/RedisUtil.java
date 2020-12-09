@@ -96,7 +96,6 @@ public class RedisUtil {
         List resourceCacheBOList = new ArrayList<>();
         for (String accurateKey : keys) {
             Object cacheValue = valueOperations.get(accurateKey);
-//            List sub = JSONArray.parseArray(cacheValue, clea);
             resourceCacheBOList.add(cacheValue);
         }
 
@@ -132,8 +131,7 @@ public class RedisUtil {
      * @return
      */
     public Object get(final String key) {
-//        redisTemplate.setHashValueSerializer(new FastJsonRedisSerializer<>(newClass));
-        Object result = null;
+        Object result;
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
         result = operations.get(key);
         return result;
@@ -146,12 +144,10 @@ public class RedisUtil {
      * @param hashKey
      * @param value
      */
-    public void hmSet(String key, Object hashKey, Object value, Class newCleass) {
-//        RedisTemplate newRedisTemplate = redisTemplate;
-        redisTemplate.setHashValueSerializer(new FastJsonRedisSerializer<>(newCleass));
+    public void hmSet(String key, Object hashKey, Object value, Class newClass) {
+        redisTemplate.setHashValueSerializer(new FastJsonRedisSerializer<>(newClass));
         HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
         hash.put(key, hashKey, value);
-//        redisTemplate.setHashValueSerializer(new FastJsonRedisSerializer<>(String.class));
 
     }
 

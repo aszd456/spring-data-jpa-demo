@@ -9,7 +9,7 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/spring_boot2_js?useUnicode=true&zeroDateTimeBehavior=convertToNull&characterEncoding=utf8&useSSL=false
     username: root
-    password: 123456
+    password:
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:

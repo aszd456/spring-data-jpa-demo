@@ -1,5 +1,6 @@
 package com.cooperative.ch12.conf;
 
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
@@ -87,10 +88,7 @@ public class RedisCache {
     public <T> ListOperations<String, T> setCacheList(String key, List<T> dataList) {
         ListOperations listOperation = redisTemplate.opsForList();
         if (null != dataList) {
-            int size = dataList.size();
-            for (int i = 0; i < size; i++) {
-                listOperation.leftPush(key, dataList.get(i));
-            }
+            dataList.forEach(item -> listOperation.leftPush(key, item));
         }
         return listOperation;
     }
@@ -102,11 +100,13 @@ public class RedisCache {
      * @return 缓存键值对应的数据
      */
     public <T> List<T> getCacheList(String key) {
-        List<T> dataList = new ArrayList<T>();
+        List<T> dataList = Lists.newArrayList();
         ListOperations<String, T> listOperation = redisTemplate.opsForList();
+        /**获取集合的长度**/
         Long size = listOperation.size(key);
 
         for (int i = 0; i < size; i++) {
+            /***根据索引获取集合中的元素**/
             dataList.add(listOperation.index(key, i));
         }
         return dataList;
@@ -135,7 +135,7 @@ public class RedisCache {
      * @return
      */
     public <T> Set<T> getCacheSet(String key) {
-        Set<T> dataSet = new HashSet<T>();
+        Set<T> dataSet;
         BoundSetOperations<String, T> operation = redisTemplate.boundSetOps(key);
         dataSet = operation.members();
         return dataSet;
