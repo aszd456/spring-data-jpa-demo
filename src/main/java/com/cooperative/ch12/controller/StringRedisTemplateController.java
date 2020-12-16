@@ -26,8 +26,7 @@ public class StringRedisTemplateController {
     @GetMapping("/setget")
     public String env(@RequestParam(defaultValue = "123") String param) {
         redisClient.opsForValue().set("testEnv", param);
-        String str = redisClient.opsForValue().get("testEnv");
-        return str;
+        return redisClient.opsForValue().get("testEnv");
     }
 
     @GetMapping("/addMessage")
@@ -51,8 +50,7 @@ public class StringRedisTemplateController {
 
     @GetMapping("/getCache")
     public String getCache(String key) throws Exception {
-        String str = (String) redisClient.opsForHash().get("cache", key);
-        return str;
+        return (String) redisClient.opsForHash().get("cache", key);
     }
 
     @GetMapping("/boundValue")
