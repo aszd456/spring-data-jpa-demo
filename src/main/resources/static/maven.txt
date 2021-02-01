@@ -116,3 +116,37 @@ Maven 依赖管理
         如果要打包，有两种方式：
         第一种就是先手动挨个将 model、dao、service 安装到本地仓库
         从聚合工程处打包，即从 web 的parent 处打包。
+    模块划分：
+        可以是父子形式：父工程是一个目录，子工程的目录在父工程目录中
+        可以是平铺的形式：即父子工程在同一目录下
+
+        一般来说，dao、service 都是打包成 jar、web 打包成 war，parent 的 packaging 类型则是一个 pom
+
+    配置细节：
+        子模块中需要配置 parent，这样 vhr-service 就继承了 parent 的一切，包括依赖、插件、坐标、版本号等等，
+        有了来自 parent 的一大堆东西之后，vhr-service 自己的 pom.xml 中只需要简单配置一下 artifactId 即可。
+        依赖的版本号则可以通过 ${project.version} 变量引用项目的版本号。
+        这里没有配置 packaging，默认就是 jar，所以可以省略，如果是 web 模块，则还需要配置 packaging 为 war
+
+    打包：
+        直接在 parent 处执行 mvn package 命令
+        如果你使用的是 IntelliJ IDEA，也可以在工具右侧找到 Maven->LifeCycle->Package，双击进行打包
+
+    目录问题：
+        在实际应用中，有的时候我们可能会采用平铺的形式
+        parent 和各个子模块处于同一目录下，这个时候，无论是 parent 的 pom.xml 还是子模块的 pom.xml，写法都会和之前略有差异
+        ...
+        <modules>
+            <module>../vhr-dao</module>
+            <module>../vhr-service</module>
+            <module>../vhr-web</module>
+        </modules>
+        ...
+        由于 module 中定义的是子模块名称，所以，当子模块和父模块处于同一目录下时，需要明确指出子模块的位置，
+        因此这里用到了相对路径
+
+        同理，在子模块中也需要明确指定父模块的 pom.xml
+        ...
+        <relativePath>../parent/pom.xml</relativePath>
+        ...
+        在 parnet 节点中多了 relativePath 用来指定父模块的 pom.xml
